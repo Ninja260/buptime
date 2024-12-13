@@ -10,3 +10,5 @@ sudo rm /etc/udev/rules.d/power_unplugged.rules
 
 # remove "buptime" folder from /etc/scripts folder
 sudo rm -r /etc/scripts/buptime/
+
+echo "Uninstallation successful!"

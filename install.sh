@@ -11,3 +11,5 @@ sudo cp $CWD/scripts/power_unplugged.rules /etc/udev/rules.d/power_unplugged.rul
 
 # make symmetric link of buptime.sh to /usr/bin/buptime
 sudo ln -s /etc/scripts/buptime/buptime.sh /usr/bin/buptime
+
+echo "Installation successful!"

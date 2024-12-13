@@ -1,0 +1,1 @@
+SUBSYSTEM=="power_supply", ATTR{online}=="0", RUN+="/etc/scripts/buptime/on_unplugged.sh"

@@ -15,18 +15,16 @@ Unplugged Time: 2024-12-13 17:14:34
 
 Clone the github repo and run the installation script.
 
-```bash
-$ git clone https://github.com/Ninja260/buptime.git
--- git clone done --
-$ ./install.sh
-Installation successful!
+```text
+git clone https://github.com/Ninja260/buptime.git
+cd buptime
+./install.sh
 ```
 
 ## Uninstallation
 
 Run the uninstallation script.
 
-```bash
-$ ./uninstall.sh
-Uninstallation successful!
+```text
+./uninstall.sh
 ```

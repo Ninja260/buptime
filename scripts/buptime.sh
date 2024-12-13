@@ -10,7 +10,7 @@ if [[ "$charging_state" == "charging" ]]; then
 fi
 
 if [[ "$charging_state" != "discharging" ]]; then
-  echo "Cannot evaluate battery up-time."
+  echo "Cannot evaluate battery up-time. [ $charging_state ]"
   exit 0 # Exit the script
 fi
 

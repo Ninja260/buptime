@@ -23,7 +23,7 @@ Cannot evaluate battery up-time. [ $(capitalize_first $charging_state) ]"
 fi
 
 ## Calcualte battery_uptime, last_charged_percentage,
-## current_battery_percent, unplugged_time_str
+## current_battery_percentage, unplugged_time_str
 
 logfile='/var/log/on_unplugged.log'
 

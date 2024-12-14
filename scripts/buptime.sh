@@ -22,25 +22,46 @@ Cannot evaluate battery up-time. [ $(capitalize_first $charging_state) ]"
   exit 0 # Exit the script
 fi
 
+## Calcualte battery_uptime, last_charged_percentage,
+## current_battery_percent, unplugged_time_str
+
 logfile='/var/log/on_unplugged.log'
 
-# Assign unplugged_time variable
-unplugged_time=$(tail -n +2 "$logfile" | head -n 1)
+unplugged_time=$(tail -n +2 "$logfile" | head -n 1) # read the second line
 
-# Assign last_charged_percentage variable
-last_charged_percentage=$(head -n 1 "$logfile")
+last_charged_percentage=$(head -n 1 "$logfile") # read the first line
 
 current_time=$(date +%s)
 
-battery_uptime=$(bash $CWD/time_difference.sh $unplugged_time $current_time)
+battery_uptime=$(($current_time - $unplugged_time))
 
 current_battery_percentage=$(bash $CWD/current_battery_percentage.sh)
 
-# Get the current date and time
 unplugged_time_str=$(date -d @$unplugged_time +"%Y-%m-%d %H:%M:%S")
 
+## Calcuate total_active_time, total_suspend_time
+
+total_suspend_time=0
+declare -i suspend_time
+declare -i resume_time
+
+while IFS= read -r line; do
+  if [[ "$line" =~ ^S ]]; then
+    # remove "S "
+    suspend_time=${line#S }
+  fi
+  if [[ "$line" =~ ^R ]]; then
+    resume_time=${line#R }
+
+    total_suspend_time+=$(($resume_time - $suspend_time))
+  fi
+done <"/var/log/on_suspend_and_resume.log"
+
+total_active_time=$(($battery_uptime - $total_suspend_time))
 # Print the formatted output
-echo "Battery Up-time: $battery_uptime
+echo "Battery Up-time: $(bash $CWD/human_readable_time.sh $battery_uptime)
+Active Time: $(bash $CWD/human_readable_time.sh $total_active_time)
+Suspend Time: $(bash $CWD/human_readable_time.sh $total_suspend_time)
 
 Charged Percentage: $last_charged_percentage
 Current Battery Percentage: $current_battery_percentage

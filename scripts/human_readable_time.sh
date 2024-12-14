@@ -1,11 +1,13 @@
 #!/bin/bash
 
-time_difference=$(($2 - $1))
+if [[ "$1" == "0" ]]; then
+  echo "-"
+  exit 0
+fi
 
-# Convert seconds to hours, minutes, and seconds
-hours=$((time_difference / 3600))
-minutes=$(((time_difference % 3600) / 60))
-seconds=$((time_difference % 60))
+hours=$(($1 / 3600))
+minutes=$((($1 % 3600) / 60))
+seconds=$(($1 % 60))
 
 result=""
 

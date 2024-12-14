@@ -5,5 +5,6 @@ output=${output//"percentage:"/}
 
 # trim whitespaces
 battery_percentage=$(echo "$output" | xargs)
+battery_percentage="${battery_percentage%%%}"
 
 echo $battery_percentage

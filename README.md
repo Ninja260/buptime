@@ -2,9 +2,11 @@
 
 Ubuntu CLI program to get (battery) up-time info since power supply unplugged.
 
-```bash
+```text
 $ buptime
 Battery Up-time: 1 hours, 15 minutes, 35 seconds
+Active Time: 45 minutes
+Suspend Time: 30 minutes, 35 seconds
 
 Charged Percentage: 100%
 Current Battery Percentage: 60%

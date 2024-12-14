@@ -53,7 +53,7 @@ while IFS= read -r line; do
   if [[ "$line" =~ ^R ]]; then
     resume_time=${line#R }
 
-    total_suspend_time+=$(($resume_time - $suspend_time))
+    total_suspend_time=$(($total_suspend_time + $resume_time - $suspend_time))
   fi
 done <"/var/log/on_suspend_and_resume.log"
 

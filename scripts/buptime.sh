@@ -2,6 +2,13 @@
 
 CWD="$(cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")" && pwd)"
 
+capitalize_first() {
+  local string="$1"
+  local first_char="${string:0:1}"
+  local rest_of_string="${string:1}"
+  echo "${first_char^^}${rest_of_string}"
+}
+
 charging_state=$(bash $CWD/current_battery_state.sh)
 
 if [[ "$charging_state" == "charging" ]]; then
@@ -10,7 +17,8 @@ if [[ "$charging_state" == "charging" ]]; then
 fi
 
 if [[ "$charging_state" != "discharging" ]]; then
-  echo "Cannot evaluate battery up-time. [ $charging_state ]"
+  echo "Battery is not discharging.
+Cannot evaluate battery up-time. [ $(capitalize_first $charging_state) ]"
   exit 0 # Exit the script
 fi
 

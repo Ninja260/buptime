@@ -24,9 +24,7 @@ last_line=$(tail -n 1 "$srlogfile")
 
 if [[ "$last_line" != "" && "$last_line" =~ ^S ]]; then
   echo "S $timestamp" >"$srlogfile"
-fi
-
-if [[ "$last_line" == "" ]]; then
+else
   truncate -s 0 "$srlogfile"
 fi
 

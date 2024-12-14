@@ -10,6 +10,7 @@ Suspend Time: 30 minutes, 35 seconds
 
 Charged Percentage: 100%
 Current Battery Percentage: 60%
+Percent Dropped Since Unplugged: 40%
 Unplugged Time: 2024-12-13 17:14:34
 ```
 

@@ -30,12 +30,14 @@ logfile='/var/log/on_unplugged.log'
 unplugged_time=$(tail -n +2 "$logfile" | head -n 1) # read the second line
 
 last_charged_percentage=$(head -n 1 "$logfile") # read the first line
+last_charged_percentage="${last_charged_percentage%%%}"
 
 current_time=$(date +%s)
 
 battery_uptime=$(($current_time - $unplugged_time))
 
 current_battery_percentage=$(bash $CWD/current_battery_percentage.sh)
+current_battery_percentage="${current_battery_percentage%%%}"
 
 unplugged_time_str=$(date -d @$unplugged_time +"%Y-%m-%d %H:%M:%S")
 
@@ -57,12 +59,16 @@ while IFS= read -r line; do
   fi
 done <"/var/log/on_suspend_and_resume.log"
 
+# Calculate dropped_percentage since unplugged
+dropped_percentage=$(($last_charged_percentage - $current_battery_percentage))
+
 total_active_time=$(($battery_uptime - $total_suspend_time))
 # Print the formatted output
 echo "Battery Up-time: $(bash $CWD/human_readable_time.sh $battery_uptime)
 Active Time: $(bash $CWD/human_readable_time.sh $total_active_time)
 Suspend Time: $(bash $CWD/human_readable_time.sh $total_suspend_time)
 
-Charged Percentage: $last_charged_percentage
-Current Battery Percentage: $current_battery_percentage
+Charged Percentage: $last_charged_percentage%
+Current Battery Percentage: $current_battery_percentage%
+Percent Dropped Since Unplugged: $dropped_percentage%
 Unplugged Time: $unplugged_time_str"

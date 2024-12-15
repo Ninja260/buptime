@@ -2,6 +2,10 @@
 
 CWD="$(cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")" && pwd)"
 
+# create flock to make sure that there is currently no active logging
+exec 100>$CWD/buptime.lock || exit 1
+flock 100 || exit 1
+
 capitalize_first() {
   local string="$1"
   local first_char="${string:0:1}"

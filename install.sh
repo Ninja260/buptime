@@ -2,20 +2,18 @@
 
 CWD="$(cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")" && pwd)"
 
-# create directory for log file in /var/log/
+# create log files
 sudo mkdir /var/log/buptime
-
-# make empty /var/log/buptime/on_unplugged.log file
 sudo touch /var/log/buptime/on_unplugged.log
 sudo chmod 777 /var/log/buptime/on_unplugged.log
-
-# make empty /var/log/buptime/on_suspend_and_resume.log file
 sudo touch /var/log/buptime/on_suspend_and_resume.log
 sudo chmod 777 /var/log/buptime/on_suspend_and_resume.log
 
 # move script files to /etc/scripts/buptime
 [ -e /etc/scripts/buptime ] || sudo mkdir -p /etc/scripts/buptime
 sudo cp $CWD/scripts/*.sh /etc/scripts/buptime
+sudo touch /etc/scripts/buptime/buptime.lock
+sudo chmod 777 /etc/scripts/buptime/buptime.lock
 
 # move power_unplugged.rules file to /etc/udev/rules.d/
 sudo cp $CWD/scripts/power_unplugged.rules /etc/udev/rules.d/power_unplugged.rules

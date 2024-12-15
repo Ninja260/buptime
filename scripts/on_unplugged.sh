@@ -22,10 +22,12 @@ srlogfile="/var/log/buptime/on_suspend_and_resume.log"
 
 last_line=$(tail -n 1 "$srlogfile")
 
+# clear out the srlogfile
+truncate -s 0 "$srlogfile"
+
 if [[ "$last_line" != "" && "$last_line" =~ ^S ]]; then
-  echo "S $timestamp $battery_percentage" >"$srlogfile"
-else
-  truncate -s 0 "$srlogfile"
+  # this line will log the new suspend record with new timestamp and current_battery_percentage
+  "$CWD/logsr.sh" suspend
 fi
 
 ## End: carry the last line

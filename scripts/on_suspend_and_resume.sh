@@ -10,7 +10,7 @@ if [[ "${CWD##*/}" == "system-sleep" ]]; then
   current_battery_percentage_sh="/etc/scripts/buptime/current_battery_percentage.sh"
 fi
 
-logfile="/var/log/on_suspend_and_resume.log"
+logfile="/var/log/buptime/on_suspend_and_resume.log"
 
 timestamp=$(date +%s)
 

@@ -25,7 +25,7 @@ fi
 ## Calcualte battery_uptime, last_charged_percentage,
 ## current_battery_percentage, unplugged_time_str
 
-logfile='/var/log/on_unplugged.log'
+logfile='/var/log/buptime/on_unplugged.log'
 
 unplugged_time=$(tail -n +2 "$logfile" | head -n 1) # read the second line
 
@@ -67,7 +67,7 @@ while IFS= read -r line; do
     total_suspend_time=$(($total_suspend_time + $resume_time - $suspend_time))
     used_percentage_in_suspend=$(($used_percentage_in_suspend + $resume_percentage - $suspend_percentage))
   fi
-done <"/var/log/on_suspend_and_resume.log"
+done <"/var/log/buptime/on_suspend_and_resume.log"
 
 total_active_time=$(($battery_uptime - $total_suspend_time))
 used_percentage_in_active=$(($used_percentage - $used_percentage_in_suspend))

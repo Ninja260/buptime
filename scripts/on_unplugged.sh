@@ -7,7 +7,7 @@ CWD="$(cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")" && pwd)"
 battery_percentage=$(bash $CWD/current_battery_percentage.sh)
 timestamp=$(date +%s)
 
-logfile="/var/log/on_unplugged.log"
+logfile="/var/log/buptime/on_unplugged.log"
 
 echo "$battery_percentage" >"$logfile"
 echo "$timestamp" >>"$logfile"
@@ -18,7 +18,7 @@ echo "$timestamp" >>"$logfile"
 ## if the last line is a suspend timestamp record.
 ## Otherwise, clear up the file
 
-srlogfile="/var/log/on_suspend_and_resume.log"
+srlogfile="/var/log/buptime/on_suspend_and_resume.log"
 
 last_line=$(tail -n 1 "$srlogfile")
 

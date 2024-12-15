@@ -18,10 +18,7 @@ sudo rm /etc/udev/rules.d/power_unplugged.rules
 # remove "buptime" folder from /etc/scripts folder
 sudo rm -r /etc/scripts/buptime/
 
-# remove /var/log/on_suspend_and_resume.log
-sudo rm /var/log/on_suspend_and_resume.log
-
-# remove /var/log/on_unplugged.log file
-sudo rm /var/log/on_unplugged.log
+# remove "buptime" folder from /var/log folder
+sudo rm -r /var/log/buptime/
 
 echo "Uninstallation successful!"

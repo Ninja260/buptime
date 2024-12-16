@@ -90,7 +90,7 @@ while IFS= read -r line; do
     IFS=' ' read -r resume_time resume_percentage <<<"$temp_line"
 
     total_suspend_time=$(($total_suspend_time + $resume_time - $suspend_time))
-    used_percentage_in_suspend=$(($used_percentage_in_suspend + $resume_percentage - $suspend_percentage))
+    used_percentage_in_suspend=$(($used_percentage_in_suspend + $suspend_percentage - $resume_percentage))
   fi
 done <"/var/log/buptime/on_suspend_and_resume.log"
 

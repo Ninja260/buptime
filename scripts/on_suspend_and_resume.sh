@@ -4,18 +4,21 @@
 
 CWD="$(cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")" && pwd)"
 
-logsr="$CWD/logsr.sh"
+program_path="$CWD"
 
 if [[ "${CWD##*/}" == "system-sleep" ]]; then
-  logsr="/etc/scripts/buptime/logsr.sh"
+  program_path="/etc/scripts/buptime"
 fi
+
+logsr="$program_path/logsr.sh"
 
 case "$1" in
 pre)
   "$logsr" suspend
   ;;
 post)
-  "$logsr" resume
+  # signale the buptime.service to log the resume record after sometimes
+  echo 1 >"$program_path/resumed"
   ;;
 *)
   # nothing

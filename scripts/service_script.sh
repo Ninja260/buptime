@@ -12,5 +12,5 @@ while true; do
     truncate -s 0 "$CWD/resumed"
   fi
 
-  sleep 3
+  sleep 5
 done

@@ -2,9 +2,30 @@
 
 CWD="$(cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")" && pwd)"
 
-# create flock to make sure that there is currently no active logging
-exec 100>$CWD/buptime.lock || exit 1
-flock 100 || exit 1
+# show Still calculating message
+function need_wait {
+  value=$(cat $CWD/resumed)
+  echo $value
+}
+
+wait=$(need_wait)
+calculating=0
+
+if [[ "$wait" == 1 ]]; then
+  calculating=1
+  echo "Calculation in progress..."
+fi
+
+while [[ "$wait" == 1 ]]; do
+  sleep 1
+  wait=$(need_wait)
+
+  if [[ "$wait" != 1 ]]; then
+    # clear the progress message
+    tput cuu1
+    tput el
+  fi
+done
 
 capitalize_first() {
   local string="$1"

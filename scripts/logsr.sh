@@ -14,7 +14,7 @@ timestamp=$(date +%s)
 
 ## sleep for 12 seconds if it is resume log
 if [[ "$1" == resume ]]; then
-  sleep 17
+  sleep 25
 fi
 
 current_battery_percentage=$(bash "$CWD/current_battery_percentage.sh")

@@ -29,9 +29,6 @@ sudo cp $CWD/scripts/on_suspend_and_resume.sh /lib/systemd/system-sleep/on_suspe
 sudo ln -s /etc/scripts/buptime/buptime.sh /usr/bin/buptime
 sudo ln -s /etc/scripts/buptime/on_unplugged.sh /usr/bin/on_unplugged.sh
 
-# Add auto start on frist login file
-sudo cp $CWD/scripts/buptime.desktop ~/.config/autostart/buptime.desktop
-
 # run on_unplugged.sh on first install to make sure file are in place
 sudo $CWD/scripts/on_unplugged.sh
 

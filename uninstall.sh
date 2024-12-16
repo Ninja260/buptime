@@ -9,9 +9,6 @@ sudo rm /etc/systemd/system/buptime.service
 sudo systemctl daemon-reload
 sudo systemctl reset-failed
 
-# remove auto start on first login file
-sudo rm ~/.config/autostart/buptime.desktop
-
 # remove symmetric link of /usr/bin/buptime
 sudo rm /usr/bin/buptime
 sudo rm /usr/bin/on_unplugged.sh

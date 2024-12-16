@@ -2,6 +2,13 @@
 
 CWD="$(cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")" && pwd)"
 
+# run "on_unplugged.sh" for the first service start
+if [[ ! -e '/run/buptime' ]]; then
+  "$CWD/on_unplugged.sh"
+
+  touch /run/buptime
+fi
+
 logsr="$CWD/logsr.sh"
 
 while true; do

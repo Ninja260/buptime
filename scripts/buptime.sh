@@ -2,6 +2,26 @@
 
 CWD="$(cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")" && pwd)"
 
+capitalize_first() {
+  local string="$1"
+  local first_char="${string:0:1}"
+  local rest_of_string="${string:1}"
+  echo "${first_char^^}${rest_of_string}"
+}
+
+charging_state=$(bash $CWD/current_battery_state.sh)
+
+if [[ "$charging_state" == "charging" ]]; then
+  echo "Battery is currently charging, cannot evaluate battery up-time."
+  exit 0 # Exit the script
+fi
+
+if [[ "$charging_state" != "discharging" ]]; then
+  echo "Battery is not discharging.
+Cannot evaluate battery up-time. [ $(capitalize_first $charging_state) ]"
+  exit 0 # Exit the script
+fi
+
 # show Still calculating message
 function need_wait {
   value=$(cat $CWD/resumed)
@@ -26,26 +46,6 @@ while [[ "$wait" == 1 ]]; do
     tput el
   fi
 done
-
-capitalize_first() {
-  local string="$1"
-  local first_char="${string:0:1}"
-  local rest_of_string="${string:1}"
-  echo "${first_char^^}${rest_of_string}"
-}
-
-charging_state=$(bash $CWD/current_battery_state.sh)
-
-if [[ "$charging_state" == "charging" ]]; then
-  echo "Battery is currently charging, cannot evaluate battery up-time."
-  exit 0 # Exit the script
-fi
-
-if [[ "$charging_state" != "discharging" ]]; then
-  echo "Battery is not discharging.
-Cannot evaluate battery up-time. [ $(capitalize_first $charging_state) ]"
-  exit 0 # Exit the script
-fi
 
 ## Calcualte battery_uptime, last_charged_percentage,
 ## current_battery_percentage, unplugged_time_str

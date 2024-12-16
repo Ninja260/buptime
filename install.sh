@@ -5,9 +5,9 @@ CWD="$(cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")" && pwd)"
 # create log files
 sudo mkdir /var/log/buptime
 sudo touch /var/log/buptime/on_unplugged.log
-sudo chmod 777 /var/log/buptime/on_unplugged.log
+sudo chmod 666 /var/log/buptime/on_unplugged.log
 sudo touch /var/log/buptime/on_suspend_and_resume.log
-sudo chmod 777 /var/log/buptime/on_suspend_and_resume.log
+sudo chmod 666 /var/log/buptime/on_suspend_and_resume.log
 
 # move script files to /etc/scripts/buptime
 # create lock file

@@ -63,7 +63,7 @@ battery_uptime=$(($current_time - $unplugged_time))
 
 current_battery_percentage=$(bash $CWD/current_battery_percentage.sh)
 
-unplugged_time_str=$(date -d @$unplugged_time +"%Y-%m-%d %H:%M:%S")
+unplugged_time_str=$(date -d @$unplugged_time +"%c")
 
 # Calculate used_percentage since unplugged
 used_percentage=$(($last_charged_percentage - $current_battery_percentage))

@@ -1,6 +1,10 @@
-# Battery Uptime ( Ubuntu )
+# Battery Uptime ( Linux )
 
-Ubuntu CLI program to get (battery) up-time info since power supply unplugged.
+Linux CLI program to get (battery) up-time info since power supply unplugged.
+The program is only compatible for Linux distros, which uses systemd.
+
+The installer have compatibility check.So you don't need to worry if you ran
+the installer by accident.
 
 ```text
 $ buptime

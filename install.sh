@@ -2,6 +2,19 @@
 
 CWD="$(cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")" && pwd)"
 
+# is the system is using upower
+which upower >/dev/null
+if [[ $? != 0 ]]; then
+  echo "Cannot install. Incompatible with the system."
+  exit 0
+fi
+# is the system is using systemd
+result=$(ps -p 1 -o comm=)
+if [[ $result != "systemd" ]]; then
+  echo "Cannot install. Incompatible with the system."
+  exit 0
+fi
+
 # create log files
 sudo mkdir /var/log/buptime
 sudo touch /var/log/buptime/on_unplugged.log

@@ -12,21 +12,21 @@ logfile="/var/log/buptime/on_suspend_and_resume.log"
 
 timestamp=$(date +%s)
 
-## sleep for 12 seconds if it is resume log
+## sleep for 25 seconds if it is resume log
 if [[ "$1" == resume ]]; then
-  sleep 25
+	sleep 25
 fi
 
 current_battery_percentage=$(bash "$CWD/current_battery_percentage.sh")
 
 case "$1" in
 suspend)
-  echo "S $timestamp $current_battery_percentage" >>"$logfile"
-  ;;
+	echo "S $timestamp $current_battery_percentage" >>"$logfile"
+	;;
 resume)
-  echo "R $timestamp $current_battery_percentage" >>"$logfile"
-  ;;
+	echo "R $timestamp $current_battery_percentage" >>"$logfile"
+	;;
 *)
-  # nothing
-  ;;
+	# nothing
+	;;
 esac
